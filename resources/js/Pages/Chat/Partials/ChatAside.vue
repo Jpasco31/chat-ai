@@ -5,7 +5,6 @@ import { Chat, Message } from '@/types/message';
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
     chat: Chat | null;
     messages: Message[];
@@ -13,8 +12,20 @@ const props = defineProps<{
 </script>
 
 <template>
-    <ul class="p-2">
-        <li v-if="chat" class="my-2">
+    <div class="flex h-full flex-col justify-between">
+        <!-- The list of chats -->
+        <ul class="flex-1 overflow-y-auto p-2">
+            <ChatListItem
+                v-for="message in messages"
+                :key="message.id"
+                :chat="chat"
+                :message="message"
+                class="my-2"
+            />
+        </ul>
+
+        <!-- The "New Chat" button pinned to the bottom -->
+        <div v-if="chat" class="p-2">
             <Link
                 :href="`/chat`"
                 class="flex justify-between rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-900 duration-200 hover:bg-amber-300"
@@ -35,12 +46,6 @@ const props = defineProps<{
                     />
                 </svg>
             </Link>
-        </li>
-        <ChatListItem
-            v-for="message in messages"
-            :key="message.id"
-            :chat="chat"
-            :message="message"
-        />
-    </ul>
+        </div>
+    </div>
 </template>

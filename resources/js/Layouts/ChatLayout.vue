@@ -8,9 +8,7 @@ import UserHeader from '@/Pages/Chat/Partials/UserHeader.vue';
         <aside
             class="fixed top-0 z-10 ml-[-100%] h-screen w-full flex-col justify-between border-r border-slate-700 bg-slate-800 px-4 pb-3 transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]"
         >
-            <div>
-                <slot name="aside" />
-            </div>
+            <slot name="aside" />
         </aside>
 
         <!-- MAIN AREA -->
