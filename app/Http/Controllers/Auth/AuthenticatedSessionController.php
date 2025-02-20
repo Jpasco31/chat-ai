@@ -20,6 +20,7 @@ class AuthenticatedSessionController extends Controller
     {
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
+            'canRegister' => Route::has('register'),
             'status' => session('status'),
         ]);
     }
@@ -29,11 +30,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Validate and authenticate the user credentials.
         $request->authenticate();
 
+        // Regenerate the session to prevent fixation attacks.
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // If the user was visiting a protected page, redirect them there.
+        // Otherwise, go to '/chat' (or use route('chat.show')).
+        return redirect()->intended(route('chat.show'));
     }
 
     /**
@@ -44,9 +49,9 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
+        // After logout, send them back to the public landing page (slash).
         return redirect('/');
     }
 }
