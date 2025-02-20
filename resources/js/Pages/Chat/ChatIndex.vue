@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import ChatAside from '@/Components/ChatAside.vue';
-import ChatDefault from '@/Components/ChatDefault.vue';
-import ChatForm from '@/Components/ChatForm.vue';
 import ChatLayout from '@/Layouts/ChatLayout.vue';
+import ChatAside from '@/Pages/Chat/Partials/ChatAside.vue';
+import ChatDefault from '@/Pages/Chat/Partials/ChatDefault.vue';
+import ChatForm from '@/Pages/Chat/Partials/ChatForm.vue';
 import { Chat, Message } from '@/types/message';
 import { Head, useForm } from '@inertiajs/vue3';
 import { computed, nextTick, onMounted, watch } from 'vue';
