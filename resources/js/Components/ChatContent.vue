@@ -24,7 +24,7 @@ const isUser = computed(() => props.context.role === 'user');
             ]"
         >
             <!-- Assistant icon on left for non-user -->
-            <span v-if="!isUser" class="mr-4">
+            <span v-if="!isUser" class="mr-1 md:mr-4">
                 <svg
                     class="size-8 text-amber-500"
                     fill="none"
@@ -42,7 +42,7 @@ const isUser = computed(() => props.context.role === 'user');
             </span>
 
             <!-- Chat content or typing dots -->
-            <section class="w-full pl-2 pr-6">
+            <section class="w-full px-1 md:pl-2 md:pr-6">
                 <!-- If loading, show dot-typing; else show the actual message text -->
                 <div v-if="!isUser && props.loading" class="dot-typing"></div>
                 <p v-else class="whitespace-pre-wrap text-justify text-sm">
@@ -51,7 +51,7 @@ const isUser = computed(() => props.context.role === 'user');
             </section>
 
             <!-- User icon on right for user messages -->
-            <span v-if="isUser" class="ml-4">
+            <span v-if="isUser" class="ml-1 md:ml-4">
                 <svg
                     class="size-8 text-indigo-400"
                     fill="none"
