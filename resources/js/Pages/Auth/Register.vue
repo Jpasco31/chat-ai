@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+<script lang="ts" setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
@@ -26,21 +26,25 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
+        <div class="pb-10 text-center text-4xl font-black text-amber-500">
+            Register
+        </div>
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />
 
                 <TextInput
                     id="name"
-                    type="text"
-                    class="mt-1 block w-full"
                     v-model="form.name"
-                    required
-                    autofocus
                     autocomplete="name"
+                    autofocus
+                    class="mt-1 block w-full"
+                    required
+                    type="text"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError :message="form.errors.name" class="mt-2" />
             </div>
 
             <div class="mt-4">
@@ -48,14 +52,14 @@ const submit = () => {
 
                 <TextInput
                     id="email"
-                    type="email"
-                    class="mt-1 block w-full"
                     v-model="form.email"
-                    required
                     autocomplete="username"
+                    class="mt-1 block w-full"
+                    required
+                    type="email"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError :message="form.errors.email" class="mt-2" />
             </div>
 
             <div class="mt-4">
@@ -63,14 +67,14 @@ const submit = () => {
 
                 <TextInput
                     id="password"
-                    type="password"
-                    class="mt-1 block w-full"
                     v-model="form.password"
-                    required
                     autocomplete="new-password"
+                    class="mt-1 block w-full"
+                    required
+                    type="password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors.password" class="mt-2" />
             </div>
 
             <div class="mt-4">
@@ -81,35 +85,33 @@ const submit = () => {
 
                 <TextInput
                     id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
                     v-model="form.password_confirmation"
-                    required
                     autocomplete="new-password"
+                    class="mt-1 block w-full"
+                    required
+                    type="password"
                 />
 
                 <InputError
-                    class="mt-2"
                     :message="form.errors.password_confirmation"
+                    class="mt-2"
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
-                >
-                    Already registered?
-                </Link>
+            <PrimaryButton
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                class="mt-4 flex w-full justify-center"
+            >
+                Register
+            </PrimaryButton>
 
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Register
-                </PrimaryButton>
-            </div>
+            <Link
+                :href="route('login')"
+                class="mt-4 inline-block w-full rounded-md text-center text-sm underline ring-1 ring-transparent transition dark:text-gray-400 dark:hover:text-amber-300 dark:focus-visible:ring-white"
+            >
+                Already registered? Go back to login
+            </Link>
         </form>
     </GuestLayout>
 </template>

@@ -1,14 +1,15 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps<{
     canResetPassword?: boolean;
+    canRegister?: boolean;
     status?: string;
 }>();
 
@@ -31,6 +32,10 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
+        <div class="pb-10 text-center text-4xl font-black text-amber-500">
+            LOGIN
+        </div>
+
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
         </div>
@@ -41,15 +46,15 @@ const submit = () => {
 
                 <TextInput
                     id="email"
-                    type="email"
-                    class="mt-1 block w-full"
                     v-model="form.email"
-                    required
-                    autofocus
                     autocomplete="username"
+                    autofocus
+                    class="mt-1 block w-full"
+                    required
+                    type="email"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError :message="form.errors.email" class="mt-2" />
             </div>
 
             <div class="mt-4">
@@ -57,26 +62,23 @@ const submit = () => {
 
                 <TextInput
                     id="password"
-                    type="password"
-                    class="mt-1 block w-full"
                     v-model="form.password"
-                    required
                     autocomplete="current-password"
+                    class="mt-1 block w-full"
+                    required
+                    type="password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors.password" class="mt-2" />
             </div>
 
-            <div class="mt-4 block">
+            <div class="mt-4 flex justify-between">
                 <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
+                    <Checkbox v-model:checked="form.remember" name="remember" />
                     <span class="ms-2 text-sm text-gray-600 dark:text-gray-400"
                         >Remember me</span
                     >
                 </label>
-            </div>
-
-            <div class="mt-4 flex items-center justify-end">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
@@ -84,15 +86,25 @@ const submit = () => {
                 >
                     Forgot your password?
                 </Link>
-
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Log in
-                </PrimaryButton>
             </div>
+
+            <div></div>
+
+            <PrimaryButton
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                class="mt-4 flex w-full justify-center"
+            >
+                Log in
+            </PrimaryButton>
+
+            <Link
+                v-if="canRegister"
+                :href="route('register')"
+                class="mt-4 inline-block w-full rounded-md text-center text-sm underline ring-1 ring-transparent transition dark:text-gray-400 dark:hover:text-amber-300 dark:focus-visible:ring-white"
+            >
+                Already have an account? Register
+            </Link>
         </form>
     </GuestLayout>
 </template>
