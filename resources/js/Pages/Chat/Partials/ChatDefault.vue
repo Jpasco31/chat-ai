@@ -1,6 +1,6 @@
 <!-- ChatDefault.vue -->
 <script lang="ts" setup>
-import ChatContent from '@/Components/ChatContent.vue';
+import ChatContent from '@/Pages/Chat/Partials/ChatContent.vue';
 import { Chat } from '@/types/message';
 import { defineProps, nextTick, onMounted, ref, watch } from 'vue';
 

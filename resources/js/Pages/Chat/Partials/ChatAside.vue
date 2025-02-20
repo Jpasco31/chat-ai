@@ -1,6 +1,6 @@
 <!-- ChatAside.vue -->
 <script lang="ts" setup>
-import ChatListItem from '@/Components/ChatListItem.vue';
+import ChatListItem from '@/Pages/Chat/Partials/ChatListItem.vue';
 import { Chat, Message } from '@/types/message';
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
