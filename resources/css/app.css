@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    /* For all scrollbars */
+    ::-webkit-scrollbar {
+        width: 5px; /* Scrollbar thickness */
+        height: 5px; /* Horizontal scrollbar height (if needed) */
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent; /* Track background color */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: gray; /* Thumb color */
+        border-radius: 5px; /* Rounded corners on thumb */
+    }
+}
