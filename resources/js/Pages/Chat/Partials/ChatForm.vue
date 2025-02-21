@@ -17,12 +17,22 @@ const chatAreaRef = ref<HTMLTextAreaElement | null>(null);
 function autoResizeChatArea() {
     const el = chatAreaRef.value;
     if (!el) return;
+
     // Reset height so it shrinks on backspace
     el.style.height = 'auto';
+
+    // Calculate the computed line height and max height
     const computedLineHeight = window.getComputedStyle(el).lineHeight;
     const lineHeight = computedLineHeight ? parseInt(computedLineHeight) : 24;
-    const maxHeight = lineHeight * 5; // allow up to 5 lines
+    const maxHeight = lineHeight * 5; // Allow up to 5 lines
+
+    // Update the height and overflow behavior based on content size
     el.style.height = Math.min(el.scrollHeight, maxHeight) + 'px';
+    if (el.scrollHeight <= maxHeight) {
+        el.style.overflow = 'hidden';
+    } else {
+        el.style.overflow = 'auto';
+    }
 }
 
 function submit() {
@@ -50,11 +60,15 @@ function submit() {
                 @keydown.enter.exact.prevent="submit"
             />
             <button
+                :class="[
+                    !processing ? 'px-4' : 'pl-4 pr-8',
+                    'absolute inset-y-0 right-0 flex items-center',
+                ]"
                 :disabled="processing"
-                class="absolute inset-y-0 right-0 flex items-center px-4"
                 @click="submit"
             >
                 <svg
+                    v-if="!processing"
                     class="h-10 w-10 text-amber-500 hover:text-amber-300"
                     fill="currentColor"
                     viewBox="0 0 24 24"
@@ -65,6 +79,7 @@ function submit() {
                         fill-rule="evenodd"
                     />
                 </svg>
+                <div v-else class="dot-typing"></div>
             </button>
         </div>
     </section>
