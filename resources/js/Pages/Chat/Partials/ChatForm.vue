@@ -42,7 +42,8 @@ function submit() {
                 rows="1"
                 @input="
                     (e) => {
-                        emit('update:modelValue', e.target.value);
+                        const target = e.target as HTMLTextAreaElement;
+                        emit('update:modelValue', target.value);
                         autoResizeChatArea();
                     }
                 "
