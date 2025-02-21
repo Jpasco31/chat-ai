@@ -37,7 +37,7 @@ watch(
 <template>
     <div
         ref="chatContainer"
-        class="h-[calc(100vh-12rem)] flex-1 overflow-y-auto px-16 lg:px-28"
+        class="h-[calc(100vh-12rem)] flex-1 overflow-y-auto px-2 md:px-16 lg:px-28"
     >
         <template v-if="chat">
             <div class="flex flex-col space-y-4">
