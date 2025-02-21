@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Cache;
 class RateLimitMiddleware
 {
 
-    protected $maxAttempts = 60;
-    protected $decaySeconds = 60;
+    protected $maxAttempts = 200;
+    protected $decaySeconds = 10;
 
     public function handle(Request $request, Closure $next)
     {
