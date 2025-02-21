@@ -32,11 +32,7 @@ defineProps<{
             <button
                 class="text-xs text-slate-400 duration-200 hover:text-red-500"
             >
-                <Link
-                    :href="route('chat.destroy', chat?.id)"
-                    as="button"
-                    method="delete"
-                >
+                <Link :href="route('chat.destroy', chat?.id)" method="delete">
                     <svg
                         class="size-4"
                         fill="none"
