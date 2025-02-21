@@ -9,13 +9,7 @@ function toggleAside() {
 
 // Checks window width and sets isAsideOpen accordingly
 function checkScreenSize() {
-    if (window.innerWidth >= 768) {
-        // md or bigger → keep the aside open by default
-        isAsideOpen.value = true;
-    } else {
-        // below md → close the aside
-        isAsideOpen.value = false;
-    }
+    isAsideOpen.value = window.innerWidth >= 768;
 }
 
 onMounted(() => {
