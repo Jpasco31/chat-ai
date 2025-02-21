@@ -20,11 +20,11 @@ const isUser = computed(() => props.context.role === 'user');
                 isUser
                     ? 'ml-auto bg-slate-800 font-bold'
                     : 'mr-auto bg-slate-700',
-                'flex max-w-[80%] items-center rounded-lg px-4 py-6 text-white',
+                'flex max-w-full items-center rounded-lg px-0 py-6 text-white sm:px-4 md:max-w-[80%]',
             ]"
         >
             <!-- Assistant icon on left for non-user -->
-            <span v-if="!isUser" class="mr-1 md:mr-4">
+            <span v-if="!isUser" class="mr-1 pl-2 md:mr-4">
                 <svg
                     class="size-8 text-amber-500"
                     fill="none"
@@ -42,16 +42,24 @@ const isUser = computed(() => props.context.role === 'user');
             </span>
 
             <!-- Chat content or typing dots -->
-            <section class="w-full px-1 md:pl-2 md:pr-6">
+            <section
+                :class="[
+                    isUser ? 'pl-2 md:pl-4 md:pr-2' : 'pr-2 md:pl-2 md:pr-4',
+                    'w-full',
+                ]"
+            >
                 <!-- If loading, show dot-typing; else show the actual message text -->
                 <div v-if="!isUser && props.loading" class="dot-typing"></div>
-                <p v-else class="whitespace-pre-wrap text-justify text-sm">
+                <p
+                    v-else
+                    class="whitespace-pre-wrap break-all text-justify text-sm"
+                >
                     {{ props.context.content }}
                 </p>
             </section>
 
             <!-- User icon on right for user messages -->
-            <span v-if="isUser" class="ml-1 md:ml-4">
+            <span v-if="isUser" class="ml-2 pr-1 md:ml-4">
                 <svg
                     class="size-8 text-indigo-400"
                     fill="none"
