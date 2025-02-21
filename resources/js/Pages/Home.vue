@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head, Link } from '@inertiajs/vue3';
-
-defineProps<{
-    canRegister?: boolean;
-}>();
 </script>
 
 <template>
