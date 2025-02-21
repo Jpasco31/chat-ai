@@ -26,19 +26,26 @@ const localChat = reactive<Chat>({
 });
 
 const handleSubmit = () => {
-    // Remove the early return so it always attempts to post:
+    localChat.context.push({
+        role: 'user',
+        content: form.prompt,
+    });
+
     localChat.context.push({
         role: 'assistant',
         content: '',
     });
 
-    // Decide URL based on whether we have a chat ID or not
     const url = props.chat ? `/chat/${props.chat?.id}` : '/chat';
 
     form.post(url, {
-        onSuccess: async () => {
+        onSuccess: () => {
+            localChat.id = props.chat?.id ?? 0;
+            localChat.context = props.chat?.context
+                ? [...props.chat.context]
+                : [];
+
             clear();
-            await nextTick();
         },
     });
 };
@@ -92,7 +99,7 @@ function handleOpenProfileModal() {
         </template>
 
         <template #default>
-            <ChatDefault :chat="chat" :processing="form.processing" />
+            <ChatDefault :chat="localChat" :processing="form.processing" />
         </template>
 
         <!-- FORM SLOT -->
