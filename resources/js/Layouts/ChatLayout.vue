@@ -65,13 +65,13 @@ onBeforeUnmount(() => {
         <!-- MAIN AREA -->
         <!-- Use flex-col so we can push the form slot to the bottom via sticky -->
         <div
-            class="ml-auto flex flex-1 flex-col md:w-[60%] lg:w-[75%] xl:w-[80%] 2xl:w-[85%]"
+            class="ml-auto flex w-full flex-1 flex-col md:w-[60%] lg:w-[75%] xl:w-[80%] 2xl:w-[85%]"
         >
             <!-- HEADER SLOT -->
             <slot name="header" />
 
             <!-- SCROLLABLE CONTENT -->
-            <div class="flex-1 overflow-y-auto p-6">
+            <div class="flex-1 overflow-y-hidden">
                 <main>
                     <slot />
                 </main>
