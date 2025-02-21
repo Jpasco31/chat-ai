@@ -5,10 +5,11 @@ use App\Http\Controllers\Chat\ChatgptIndexController;
 use App\Http\Controllers\Chat\ChatgptStoreController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])
-    ->middleware('guest')
+    ->middleware([RedirectIfAuthenticated::class])
     ->name('index');
 
 Route::middleware('auth')->group(function () {
