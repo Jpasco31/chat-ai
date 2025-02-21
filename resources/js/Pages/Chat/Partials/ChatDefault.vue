@@ -16,7 +16,10 @@ const chatContainer = ref<HTMLDivElement | null>(null);
 function scrollToBottom() {
     if (!chatContainer.value) return;
     // Scroll all the way down
-    chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+    chatContainer.value.scrollTo({
+        top: chatContainer.value.scrollHeight,
+        behavior: 'smooth',
+    });
 }
 
 // Scroll on mount:
