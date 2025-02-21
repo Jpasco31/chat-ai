@@ -78,5 +78,3 @@ const isUser = computed(() => props.context.role === 'user');
         </div>
     </div>
 </template>
-
-<style scoped></style>
