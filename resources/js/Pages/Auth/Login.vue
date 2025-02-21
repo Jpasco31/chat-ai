@@ -32,7 +32,7 @@ const submit = () => {
     <GuestLayout>
         <Head title="Log in" />
 
-        <div class="pb-10 text-center text-4xl font-black text-amber-500">
+        <div class="pb-10 text-center text-4xl font-black text-white">
             LOGIN
         </div>
 
@@ -103,7 +103,7 @@ const submit = () => {
                 :href="route('register')"
                 class="mt-4 inline-block w-full rounded-md text-center text-sm underline ring-1 ring-transparent transition dark:text-gray-400 dark:hover:text-amber-300 dark:focus-visible:ring-white"
             >
-                Already have an account? Register
+                Don't have an account? Register
             </Link>
         </form>
     </GuestLayout>
