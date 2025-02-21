@@ -1,6 +1,4 @@
-<script lang="ts" setup>
-import UserHeader from '@/Pages/Chat/Partials/UserHeader.vue';
-</script>
+<script lang="ts" setup></script>
 
 <template>
     <div class="flex h-screen w-screen overflow-hidden">
@@ -13,8 +11,8 @@ import UserHeader from '@/Pages/Chat/Partials/UserHeader.vue';
 
         <!-- MAIN AREA -->
         <div class="ml-auto flex flex-col lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-            <!-- USER INFO HEADER -->
-            <UserHeader :route="route" :userName="$page.props.auth.user.name" />
+            <!-- HEADER SLOT -->
+            <slot name="header" />
 
             <div class="relative flex-1 pb-32 pt-6">
                 <main>

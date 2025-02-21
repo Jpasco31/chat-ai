@@ -2,7 +2,7 @@
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 
-const props = defineProps<{
+defineProps<{
     userName: string;
     route: Function;
 }>();
@@ -16,7 +16,7 @@ const props = defineProps<{
                         class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                         type="button"
                     >
-                        {{ userName }}
+                        Hello, {{ userName }}!
 
                         <svg
                             class="-me-0.5 ms-2 h-4 w-4"
@@ -35,9 +35,12 @@ const props = defineProps<{
             </template>
 
             <template #content>
-                <DropdownLink :href="route('profile.edit')"
-                    >Profile</DropdownLink
+                <DropdownLink
+                    as="button"
+                    @click.prevent="$emit('openProfileModal')"
                 >
+                    Profile
+                </DropdownLink>
                 <DropdownLink :href="route('logout')" as="button" method="post">
                     Log Out
                 </DropdownLink>
