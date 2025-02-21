@@ -7,7 +7,7 @@ import UserHeader from '@/Pages/Chat/Partials/UserHeader.vue';
 import Edit from '@/Pages/Profile/Edit.vue';
 import { Chat, Message } from '@/types/message';
 import { Head, useForm } from '@inertiajs/vue3';
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
 
 const props = defineProps<{
     messages: Message[];
@@ -20,8 +20,21 @@ const form = useForm({
 
 const editProfile = ref<InstanceType<typeof Edit> | null>(null);
 
+const localChat = reactive<Chat>({
+    id: props.chat?.id ?? 0,
+    context: props.chat?.context ? [...props.chat.context] : [],
+});
+
 const handleSubmit = () => {
+    // Remove the early return so it always attempts to post:
+    localChat.context.push({
+        role: 'assistant',
+        content: '',
+    });
+
+    // Decide URL based on whether we have a chat ID or not
     const url = props.chat ? `/chat/${props.chat?.id}` : '/chat';
+
     form.post(url, {
         onSuccess: async () => {
             clear();
@@ -46,7 +59,12 @@ onMounted(() => {
     clear();
 });
 
-const title = computed(() => props.chat?.context[0].content ?? 'New Chat');
+const title = computed(() => {
+    const content = props.chat?.context?.[0]?.content ?? '';
+    return content
+        ? content.substring(0, 15) + (content.length > 15 ? '...' : '')
+        : 'New Chat';
+});
 
 // Parent method that calls the child's exposed method
 function handleOpenProfileModal() {
