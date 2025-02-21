@@ -23,7 +23,9 @@ const submit = () => {
     <GuestLayout>
         <Head title="Forgot Password" />
 
-        <div class="pb-10 text-center text-4xl font-black text-white">
+        <div
+            class="pb-10 text-center text-4xl font-black text-slate-900 dark:text-white"
+        >
             Forgot Password?
         </div>
 

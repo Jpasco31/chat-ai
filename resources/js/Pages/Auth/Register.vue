@@ -26,7 +26,9 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
-        <div class="text-White pb-10 text-center text-4xl font-black">
+        <div
+            class="font pb-10 text-center text-4xl text-slate-900 dark:text-white"
+        >
             Register
         </div>
 
