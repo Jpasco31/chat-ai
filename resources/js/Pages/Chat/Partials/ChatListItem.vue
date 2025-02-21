@@ -4,8 +4,7 @@ import { Chat, Message } from '@/types/message';
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps<{
+defineProps<{
     message: Message;
     chat: Chat | null;
 }>();
@@ -36,7 +35,7 @@ const props = defineProps<{
                 <Link
                     :href="route('chat.destroy', chat?.id)"
                     as="button"
-                    method="DELETE"
+                    method="delete"
                 >
                     <svg
                         class="size-4"

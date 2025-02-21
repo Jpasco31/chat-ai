@@ -2,8 +2,7 @@
 <script lang="ts" setup>
 import { defineEmits, defineProps, ref } from 'vue';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps<{
+defineProps<{
     modelValue: string;
     processing: boolean;
 }>();

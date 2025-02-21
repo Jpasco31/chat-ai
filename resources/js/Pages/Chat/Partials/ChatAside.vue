@@ -5,7 +5,7 @@ import { Chat, Message } from '@/types/message';
 import { Link } from '@inertiajs/vue3';
 import { defineProps } from 'vue';
 
-const props = defineProps<{
+defineProps<{
     chat: Chat | null;
     messages: Message[];
 }>();
