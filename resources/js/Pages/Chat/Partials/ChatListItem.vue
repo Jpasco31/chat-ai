@@ -21,7 +21,7 @@ defineProps<{
             ]"
             :href="`/chat/${message.id}`"
         >
-            {{ message.context[0].content }}
+            {{ message.context[0].content.substring(0, 20) }}
         </Link>
 
         <!-- Only render the delete button if this is the active chat -->
