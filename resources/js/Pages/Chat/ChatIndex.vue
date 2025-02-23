@@ -5,9 +5,9 @@ import ChatDefault from '@/Pages/Chat/Partials/ChatDefault.vue';
 import ChatForm from '@/Pages/Chat/Partials/ChatForm.vue';
 import UserHeader from '@/Pages/Chat/Partials/UserHeader.vue';
 import Edit from '@/Pages/Profile/Edit.vue';
-import { Chat, Message } from '@/types/message';
-import { Head, useForm } from '@inertiajs/vue3';
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
+import {Chat, Message} from '@/types/message';
+import {Head, useForm} from '@inertiajs/vue3';
+import {computed, nextTick, onMounted, reactive, ref, watch} from 'vue';
 
 const props = defineProps<{
     messages: Message[];
@@ -80,10 +80,28 @@ function handleOpenProfileModal() {
         editProfile.value.openModal();
     }
 }
+
+watch(
+    () => props.chat,
+    (newChat) => {
+        if (!newChat) {
+            // Means the server returned null (chat deleted or no ID)
+            localChat.id = 0;
+            localChat.context = [];
+
+            // (Optional) If you store chat data in localStorage, remove or reset it:
+            // localStorage.removeItem('localChatKey');
+        } else {
+            // If a valid newChat arrives, sync localChat with it
+            localChat.id = newChat.id;
+            localChat.context = [...newChat.context];
+        }
+    },
+);
 </script>
 
 <template>
-    <Head :title="title" />
+    <Head :title="title"/>
     <ChatLayout>
         <template #header>
             <UserHeader
@@ -95,11 +113,11 @@ function handleOpenProfileModal() {
 
         <!-- ASIDE SLOT -->
         <template #aside>
-            <ChatAside :chat="chat" :messages="messages" />
+            <ChatAside :chat="chat" :messages="messages"/>
         </template>
 
         <template #default>
-            <ChatDefault :chat="localChat" :processing="form.processing" />
+            <ChatDefault :chat="localChat" :processing="form.processing"/>
         </template>
 
         <!-- FORM SLOT -->
@@ -112,5 +130,5 @@ function handleOpenProfileModal() {
         </template>
     </ChatLayout>
     <!-- Render the Profile Edit component offscreen until needed -->
-    <Edit ref="editProfile" />
+    <Edit ref="editProfile"/>
 </template>
